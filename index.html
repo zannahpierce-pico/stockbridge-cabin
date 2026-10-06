@@ -55,7 +55,7 @@
 </style>
 <div class="bar">
   <h1>Stockbridge Cabin</h1>
-  <div class="seg" id="mode" role="group" aria-label="Navigation mode"><button data-m="orbit" id="m_orbit" class="on" title="Turn the whole model around from outside">Orbit</button><button data-m="walk" id="m_walk" title="Walk through at eye height">Walk</button></div>
+  <div class="seg own" id="mode" role="group" aria-label="Navigation mode"><button data-m="orbit" id="m_orbit" class="on" title="Turn the whole model around from outside">Orbit</button><button data-m="walk" id="m_walk" title="Walk through at eye height">Walk</button></div>
   <button type="button" class="pop uibtn" data-p="p_views" id="b_views">Views</button>
   <button type="button" class="pop uibtn" data-p="p_layers" id="b_layers">Show / hide</button>
   <button type="button" class="pop uibtn" data-p="p_furn" id="b_furn">Furnishings</button>
@@ -64,8 +64,8 @@
   <button type="button" class="uibtn" id="b_help">How to move</button>
 </div>
 <div id="help" hidden>
-  <b>Walk (inside)</b>Click a spot on the floor to walk there. Drag to look around. Arrow keys also move you. Click the bath door to open it.
-  <b>Orbit (outside)</b>Drag to turn the model. Scroll or pinch to zoom. Right-drag or two fingers to slide it.
+  <b><span class="own">Walk (inside)</span><span class="shareonly">Moving around</span></b>Click a spot on the floor to walk there. Drag to look around. Arrow keys also move you.
+  <span class="own"><b>Orbit (outside)</b>Drag to turn the model. Scroll or pinch to zoom. Right-drag or two fingers to slide it.</span>
   <b>Menus</b>Views jumps to a room. Show / hide takes off the roof or a wall, and shows the wall framing and wiring. Furnishings tries couch, rug and stool choices. Lights switches to night.
   <br><button type="button" class="uibtn" id="help_ok">Got it</button>
 </div>
