@@ -63,7 +63,7 @@
   <button type="button" class="pop uibtn own" data-p="p_stools" id="b_stools">Stools</button>
   <button type="button" class="pop uibtn" data-p="p_lights" id="b_lights">Lights</button>
   <a class="uibtn shareonly" href="electrical-plan.html">Electrical plan</a>
-  <button type="button" class="uibtn shareonly" id="b_help">How to move</button>
+  <button type="button" class="uibtn" id="b_help">How to move</button>
 </div>
 <div id="help" hidden>
   <b>Walk (inside)</b>Click a spot on the floor to walk there. Drag to look around. Arrow keys also move you. Click the bath door to open it.
@@ -807,8 +807,8 @@
   function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
   window.addEventListener('resize', resize); resize();
   var start = (location.hash || '').slice(1); setView(VIEWS[start] ? start : 'front');
-  (function () {                                                    // shared copy only: a short how-to card, shown on the first visit and from its button
-    var h = document.getElementById('help'), seen = false; if (!document.documentElement.classList.contains('share')) return;
+  (function () {                                                    // a short how-to card, shown on the first visit and from its button; once closed it stays closed
+    var h = document.getElementById('help'), seen = false;
     try { seen = localStorage.getItem('cabin_help') === '1'; } catch (e) {}
     h.hidden = seen;
     document.getElementById('help_ok').addEventListener('click', function () { h.hidden = true; try { localStorage.setItem('cabin_help', '1'); } catch (e) {} });
