@@ -58,9 +58,9 @@
   <div class="seg" id="mode" role="group" aria-label="Navigation mode"><button data-m="orbit" id="m_orbit" class="on" title="Turn the whole model around from outside">Orbit</button><button data-m="walk" id="m_walk" title="Walk through at eye height">Walk</button></div>
   <button type="button" class="pop uibtn" data-p="p_views" id="b_views">Views</button>
   <button type="button" class="pop uibtn" data-p="p_layers" id="b_layers">Show / hide</button>
-  <button type="button" class="pop uibtn own" data-p="p_couch" id="b_couch">Couch color</button>
-  <button type="button" class="pop uibtn own" data-p="p_rug" id="b_rug">Living rug</button>
-  <button type="button" class="pop uibtn own" data-p="p_stools" id="b_stools">Stools</button>
+  <button type="button" class="pop uibtn" data-p="p_couch" id="b_couch">Couch color</button>
+  <button type="button" class="pop uibtn" data-p="p_rug" id="b_rug">Living rug</button>
+  <button type="button" class="pop uibtn" data-p="p_stools" id="b_stools">Stools</button>
   <button type="button" class="pop uibtn" data-p="p_lights" id="b_lights">Lights</button>
   <a class="uibtn shareonly" href="electrical-plan.html">Electrical plan</a>
   <button type="button" class="uibtn" id="b_help">How to move</button>
@@ -75,11 +75,7 @@
   <span class="ptitle">Outside</span>
   <div class="views" id="views">
     <button data-v="front" id="v_front" class="on">Front</button>
-    <button data-v="back" id="v_back">Back door</button>
-    <button data-v="porch" id="v_porch">Porch wall</button>
-    <button data-v="bank" id="v_bank">Bank wall</button>
     <button data-v="cutaway" id="v_cutaway">Cutaway</button>
-    <button data-v="plan" id="v_plan">From above</button>
   </div>
   <span class="ptitle">Inside</span>
   <div class="views" id="views_in">
@@ -138,7 +134,7 @@
     <label><input type="checkbox" id="l_outside" checked> outside lights</label>
     <label><input type="checkbox" id="l_fire" checked> fire in the stove</label>
     <label title="Footcandles on a level surface at counter height, from the lights switched on. Rough guide: 30 to 50 for cooking and reading, 10 to 20 for a living area, 3 to 5 to move around."><input type="checkbox" id="lv_show"> light levels on the floor (footcandles)</label>
-    <span class="hint" style="font-size:11.5px;color:var(--ink-2)">Guide: 30&ndash;50 cooking and reading &middot; 10&ndash;20 living &middot; 3&ndash;5 moving around. Best seen in the &ldquo;From above&rdquo; view.</span>
+    <span class="hint" style="font-size:11.5px;color:var(--ink-2)">Guide: 30&ndash;50 cooking and reading &middot; 10&ndash;20 living &middot; 3&ndash;5 moving around.</span>
   </div>
 </div>
 <div class="panel" id="p_couch" hidden>
@@ -629,7 +625,7 @@
     stove:   { pos: [7.0, 4.8, -12.6], tgt: [11.8, 3.3, -18.0], fov: 62 },
     cabwire: { pos: [3.2, 5.0, -7.6], tgt: [7.6, 4.2, -5.6], fov: 70 }, cabwire2: { pos: [9.0, 4.6, -11.5], tgt: [10.5, 5.6, -5.97], fov: 70 },
     pocketb: { pos: [7.0, 5.2, -15.6], tgt: [13.2, 5.6, -13.4], fov: 62 }, pocketp: { pos: [6.5, 5.2, -15.6], tgt: [0.0, 5.6, -13.4], fov: 62 },
-    living:  { pos: [4.4, 5.4, -9.5], tgt: [7.2, 5.6, -19], fov: 72 },
+    living:  { pos: [3.2, 5.4, -18.0], tgt: [8.6, 4.4, -5.0], fov: 72 },                 // standing just inside the slider, looking in
     loft:    { pos: [9.6, 11.1, -12.9], tgt: [9.4, 9.6, -2], fov: 78 }
   };
   // ================= navigation: Orbit (outside) and Walk (eye height, click-to-move), as in the dream-property viewer =================
