@@ -569,7 +569,7 @@
 
   // ---- toggles and views ----
   var simple = ['roof', 'wall_front', 'wall_back', 'wall_driveway', 'wall_tall', 'loft', 'furnishings', 'deck'], tagBox = document.getElementById('t_tags');
-  var stoolPick = 'stools_c', ceilPick = 'ceil_b';
+  var stoolPick = 'stools_b', ceilPick = 'ceil_b';
   function box(n) { return document.getElementById('t_' + n); }
   // the mirror reflects a snapshot of the room taken from just in front of it, retaken whenever a layer or a light changes
   var envRT = new THREE.WebGLCubeRenderTarget(256, { encoding: THREE.sRGBEncoding }), envCam = new THREE.CubeCamera(0.2, 80, envRT), envDirty = 3;
@@ -762,7 +762,7 @@
   var stoolSw = document.getElementById('stoolsw');
   function setStools(n, save) { stoolPick = n; stoolSw.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-s') === n); }); apply(); if (save) { try { localStorage.setItem('sbc.stools', n); } catch (e) {} } }
   stoolSw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setStools(b.getAttribute('data-s'), true); });
-  (function () { var n = null; try { n = localStorage.getItem('sbc.stools'); } catch (e) {} setStools(groups[n] ? n : 'stools_c', false); })();
+  (function () { var n = null; try { n = localStorage.getItem('sbc.stools'); } catch (e) {} setStools(groups[n] ? n : 'stools_b', false); })();   // first visit: the red stools
   var ceilSw = document.getElementById('ceilsw');
   function setCeil(n, save) { ceilPick = n; ceilSw.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-s') === n); }); apply(); if (save) { try { localStorage.setItem('sbc.ceil', n); } catch (e) {} } }
   ceilSw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setCeil(b.getAttribute('data-s'), true); });
@@ -779,7 +779,7 @@
   couchSw.querySelectorAll('button').forEach(function (b) { b.style.background = b.getAttribute('data-c'); });
   couchSw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setCouch(b, true); });
   (function () { var n = null; try { n = localStorage.getItem('sbc.couch'); } catch (e) {}
-    var b = n && Array.prototype.find.call(couchSw.querySelectorAll('button'), function (x) { return x.getAttribute('data-n') === n; }); if (b) setCouch(b, false); })();
+    var b = n && Array.prototype.find.call(couchSw.querySelectorAll('button'), function (x) { return x.getAttribute('data-n') === n; }); setCouch(b || couchSw.querySelector('button[data-n="Mustard"]'), false); })();   // first visit: the yellow couch
   var rugSw = document.getElementById('rugsw'), rugMesh = groups.rug && groups.rug.getObjectByName('rugmesh');
   function setRug(i, save) {                                       // i = index into DATA.rug.options, or -1 for no rug
     var o = DATA.rug.options[i];
@@ -796,7 +796,7 @@
     var nb0 = document.createElement('button'); nb0.type = 'button'; nb0.id = 'rug_none'; nb0.setAttribute('data-i', -1); nb0.textContent = 'none'; rugSw.insertBefore(nb0, nameEl);
     rugSw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setRug(parseInt(b.getAttribute('data-i'), 10), true); });
     var saved = null; try { saved = localStorage.getItem('sbc.rug'); } catch (e) {}
-    var si = 0; DATA.rug.options.forEach(function (o, i) { if (o.n === saved) si = i; }); if (saved === 'none') si = -1;
+    var si = 0; DATA.rug.options.forEach(function (o, i) { if (o.n === 'Blue and gold') si = i; }); DATA.rug.options.forEach(function (o, i) { if (o.n === saved) si = i; });   // first visit: the blue and gold rug if (saved === 'none') si = -1;
     setRug(si, false);
   }
   function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
