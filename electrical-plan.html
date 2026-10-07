@@ -14,7 +14,7 @@
   }
   :root[data-theme="dark"] { --paper: #1c1e22; --ink: #e8e4dc; --ink-2: #a6a39b; --rule: #34383f; --panel: #26292e; --rec: #ef7d70; --sw: #7fb0e6; --lt: #e6a53c; --glass: #7fb0e6; color-scheme: dark; }
   body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
-  .wrap { max-width: 1240px; margin: 0 auto; padding-block: 28px 64px; padding-inline: 20px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 28px 16px 64px; }
   header { display: grid; grid-template-columns: 1fr auto; gap: 16px 32px; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 20px; }
   h1 { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
   .sub { color: var(--ink-2); margin: 6px 0 0; max-width: 64ch; }
@@ -50,7 +50,7 @@
   .sitenav a:hover { color: var(--ink); border-bottom-color: var(--rule); }
   .sitenav a[aria-current] { color: var(--ink); border-bottom-color: var(--rec); }
   body { margin: 0; }
-  .topbar { padding: 8px 16px; border-bottom: 1px solid var(--rule); background: var(--paper); }
+  .topbar { border-bottom: 1px solid var(--rule); background: var(--paper); } .topbar .sitenav { max-width: 1240px; margin: 0 auto; padding: 8px 16px; box-sizing: border-box; }   /* nav lines up with the page's left edge */
   tr.grp td { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); background: var(--panel); padding: 5px 8px; border-bottom: 1px solid var(--rule); }
   h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: 0.02em; margin: 26px 0 6px; text-transform: uppercase; }
   .r { text-align: right; } td.r, th.r { padding-right: 0; padding-left: 12px; }
