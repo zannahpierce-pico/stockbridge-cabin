@@ -858,7 +858,7 @@
   }); });
   document.addEventListener('pointerdown', function (e) { if (!e.target.closest('.panel') && !e.target.closest('.pop')) closePanels(); });
   // wall and ceiling boards: white or natural, and the wall boards level or upright. The wall texture is turned a quarter turn for upright boards.
-  var FIN = { dir: 'h', fin: 'white', ceil: 'natural', cdir: 'l' };
+  var FIN = { dir: 'h', fin: 'white', ceil: 'natural', cdir: 's' };   // first visit: level whitewashed wall boards, natural ceiling boards running up the slope
   function setFinish(k, v, save) {
     if (k) FIN[k] = v;
     var wt = FIN.fin === 'white' ? T.whitewash : T.wallnat; wt.rotation = FIN.dir === 'v' ? Math.PI / 2 : 0;
