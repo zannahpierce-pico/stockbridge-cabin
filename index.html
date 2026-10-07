@@ -132,7 +132,7 @@
   <span class="ptitle">Inside wall boards</span>
   <div class="views" id="wallsw"><button type="button" data-k="dir" data-v="h">Horizontal</button><button type="button" data-k="dir" data-v="v">Vertical</button><span style="width:10px"></span><button type="button" data-k="fin" data-v="white">White</button><button type="button" data-k="fin" data-v="natural">Natural wood</button></div>
   <span class="ptitle">Ceiling boards</span>
-  <div class="views" id="ceilfsw"><button type="button" data-k="ceil" data-v="natural">Natural wood</button><button type="button" data-k="ceil" data-v="white">White</button></div>
+  <div class="views" id="ceilfsw"><button type="button" data-k="cdir" data-v="l" title="Boards run the length of the cabin, front to back">Lengthwise</button><button type="button" data-k="cdir" data-v="s" title="Boards run up the slope, from the low wall to the tall wall">Up the slope</button><span style="width:10px"></span><button type="button" data-k="ceil" data-v="natural">Natural wood</button><button type="button" data-k="ceil" data-v="white">White</button></div>
   <span class="ptitle">Couch fabric</span>
   <div class="swatches" id="couchsw">
     <button type="button" data-c="#6f7a45" data-n="Olive" title="Olive" class="on"></button>
@@ -858,16 +858,16 @@
   }); });
   document.addEventListener('pointerdown', function (e) { if (!e.target.closest('.panel') && !e.target.closest('.pop')) closePanels(); });
   // wall and ceiling boards: white or natural, and the wall boards level or upright. The wall texture is turned a quarter turn for upright boards.
-  var FIN = { dir: 'h', fin: 'white', ceil: 'natural' };
+  var FIN = { dir: 'h', fin: 'white', ceil: 'natural', cdir: 'l' };
   function setFinish(k, v, save) {
     if (k) FIN[k] = v;
     var wt = FIN.fin === 'white' ? T.whitewash : T.wallnat; wt.rotation = FIN.dir === 'v' ? Math.PI / 2 : 0;
     MAT.ply.map = wt; MAT.interior.map = wt; MAT.ply.needsUpdate = MAT.interior.needsUpdate = true;
-    MAT.roof.map = FIN.ceil === 'white' ? T.ceilwhite : T.ceilnat; MAT.roof.needsUpdate = true;
+    var ct = FIN.ceil === 'white' ? T.ceilwhite : T.ceilnat; ct.rotation = FIN.cdir === 's' ? Math.PI / 2 : 0; MAT.roof.map = ct; MAT.roof.needsUpdate = true;
     document.querySelectorAll('#wallsw button, #ceilfsw button').forEach(function (b) { b.classList.toggle('on', FIN[b.getAttribute('data-k')] === b.getAttribute('data-v')); });
     envDirty = 2; if (save && k) { try { localStorage.setItem('sbc.' + k, v); } catch (e) {} }
   }
-  ['dir', 'fin', 'ceil'].forEach(function (k) { try { var v = localStorage.getItem('sbc.' + k); if (v && document.querySelector('[data-k="' + k + '"][data-v="' + v + '"]')) FIN[k] = v; } catch (e) {} });
+  ['dir', 'fin', 'ceil', 'cdir'].forEach(function (k) { try { var v = localStorage.getItem('sbc.' + k); if (v && document.querySelector('[data-k="' + k + '"][data-v="' + v + '"]')) FIN[k] = v; } catch (e) {} });
   setFinish(null, null, false);
   ['wallsw', 'ceilfsw'].forEach(function (id) { document.getElementById(id).addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setFinish(b.getAttribute('data-k'), b.getAttribute('data-v'), true); }); });
   var stoolSw = document.getElementById('stoolsw');
