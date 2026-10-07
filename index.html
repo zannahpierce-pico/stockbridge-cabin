@@ -47,7 +47,7 @@
   .key #pick { display: block; margin-top: 4px; color: var(--ink-2); min-height: 1.3em; }
   .shareonly, .share .own { display: none !important; }
   .share .shareonly { display: inline-block !important; }
-  a.uibtn { text-decoration: none; }
+  a.uibtn { text-decoration: none; } .navlinks a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   #help { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 4; width: min(430px, calc(100vw - 32px)); box-sizing: border-box; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
   #help b { display: block; margin-top: 6px; } #help b:first-child { margin-top: 0; } #help button { margin-top: 10px; }
   #acts { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
@@ -71,8 +71,7 @@
   <button type="button" class="pop uibtn" data-p="p_layers" id="b_layers">Show / hide</button>
   <button type="button" class="pop uibtn" data-p="p_furn" id="b_furn">Options</button>
   <button type="button" class="pop uibtn" data-p="p_lights" id="b_lights">Lights</button>
-  <a class="uibtn shareonly" href="electrical-plan.html">Electrical plan</a>
-  <a class="uibtn shareonly" href="building-notes.html">Building notes</a>
+  <button type="button" class="pop uibtn" data-p="p_nav" id="b_nav">Pages</button>
   <button type="button" class="uibtn on" id="b_notes" aria-pressed="true" title="Show or hide the owners' notes and questions in the model">Notes: on</button>
   <button type="button" class="uibtn" id="b_help">How to move</button>
 </div>
@@ -85,6 +84,10 @@
   <b>Yellow notes</b>These are our notes and questions about the plan. Click one to read it. The Notes button in the bar turns them off.
   <b>Menus</b>Views jumps to a room. Show / hide takes off the roof or a wall, and shows the wall framing and wiring. Options tries wall and ceiling boards, and couch, rug and stool choices. Lights switches to night.
   <br><button type="button" class="uibtn" id="help_ok">Got it</button>
+</div>
+<div class="panel" id="p_nav" hidden>
+  <span class="ptitle">Stockbridge Cabin</span>
+  <div class="views navlinks"><a class="uibtn" data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener" aria-current="page">3D model</a><a class="uibtn" data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener">Electrical plan</a><a class="uibtn" data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener">Building notes</a></div>
 </div>
 <div class="panel" id="p_views" hidden>
   <span class="ptitle">Outside</span>
@@ -922,6 +925,7 @@
     document.getElementById('help_ok').addEventListener('click', function () { h.hidden = true; try { localStorage.setItem('cabin_help', '1'); } catch (e) {} });
     document.getElementById('b_help').addEventListener('click', function () { h.hidden = !h.hidden; });
   })();
+  if (document.documentElement.classList.contains('share')) document.querySelectorAll('a[data-s]').forEach(function (l) { l.href = l.getAttribute('data-s'); l.removeAttribute('target'); });   // public site: the pages sit side by side
   window.__cabin = { fc: function (x, y, z) { return fcAt(x, y, z, zoneBounce()); }, levels: function () { updateLevels(); }, scene: scene, renderer: renderer, hemi: hemi, setView: setView, night: function () { nb.click(); }, camera: camera, state: function () { return { mode: mode, yaw: yaw, goal: goal, base: base, pos: camera.position.toArray() }; }, step: function (n) { for (var i = 0; i < n; i++) walkStep(0.05); }, key: function (k, on) { keys[k] = on; } };
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) controls.enableDamping = false;
   var last = performance.now();

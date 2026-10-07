@@ -1,4 +1,5 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<script>document.documentElement.classList.add('share')</script>
 <title>Stockbridge Cabin Building Notes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -26,9 +27,13 @@
   th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 600; padding: 6px 12px 6px 0; border-bottom: 1px solid var(--ink); }
   td { padding: 6px 12px 6px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   .note { background: var(--panel); padding: 12px 16px; border-left: 3px solid var(--accent); max-width: 76ch; margin-top: 18px; font-size: 14.5px; }
+  .sitenav { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0 0 18px; font-family: var(--mono); font-size: 13px; }
+  .sitenav a { color: var(--ink); text-decoration: none; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 2px; background: var(--panel); }
+  .sitenav a:hover { border-color: var(--ink-2); } .sitenav a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   @media (max-width: 720px) { h1 { font-size: 34px; } h2 { font-size: 26px; } }
 </style>
 <div class="wrap">
+<div class="sitenav" role="navigation" aria-label="Pages"><a data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener">3D model</a><a data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener">Electrical plan</a><a data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener" aria-current="page">Building notes</a></div>
 <header>
   <h1>Stockbridge Cabin Building Notes</h1>
   <p class="sub">Our working notes: sizes, products we are looking at, things we tried and set aside, and the research behind the wiring. Measurements come from the 3D model and from photos, so tape anything that has to fit within an inch or two.</p>
@@ -184,4 +189,4 @@ NOT CONFIRMED (the listing's spec table is blank): maximum gate width and weight
 </li></ul>
 <div class="note">Working notes, not instructions. Prices, product details and code references were correct as far as we could tell when written and are not re-checked.</div>
 </div>
-<a href="./" style="position:fixed;top:10px;right:12px;z-index:9;font:13px system-ui,sans-serif;padding:6px 11px;border:1px solid #8a8f96;border-radius:3px;background:#f5f2eb;color:#1f2328;text-decoration:none">Back to the 3D model</a>
+<script>(function () { if (document.documentElement.classList.contains('share')) document.querySelectorAll('a[data-s]').forEach(function (a) { a.href = a.getAttribute('data-s'); a.removeAttribute('target'); }); })();</script>
