@@ -42,6 +42,7 @@
   td { padding: 6px 12px 6px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   td.n { font-family: var(--mono); font-size: 13px; white-space: nowrap; }
   code { font-family: var(--mono); font-size: 12.5px; }
+  .research { margin-top: 48px; border-top: 2px solid var(--ink); } .research h4 { font-size: 15px; margin: 18px 0 4px; } .research a { color: var(--rec); overflow-wrap: anywhere; }
   tr.grp td { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); background: var(--panel); padding: 5px 8px; border-bottom: 1px solid var(--rule); }
   h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: 0.02em; margin: 26px 0 6px; text-transform: uppercase; }
   .r { text-align: right; } td.r, th.r { padding-right: 0; padding-left: 12px; }
@@ -131,6 +132,187 @@
 </ol>
 
 <div class="note"><strong>Draft, not a permit drawing</strong>Spacing follows common residential practice (an outlet within 6' along usable wall, GFCI at counters and outdoors). Window sizes on the back, porch and bank walls are estimates from photos, good to a few inches. Have whoever wires it confirm circuits, box locations against the framing, and local code before roughing in.</div>
+<div class="research">
+<h2 id="research">Wiring research</h2>
+<p>Researched 2026-10-06. These are working notes from web sources and general knowledge of the National Electrical Code (NEC), not a substitute for the code text, the equipment manuals or an electrician. Items marked CHECK are not confirmed.</p>
+<h3 id="research-who-can-do-the-work-vermont">Who can do the work (Vermont)</h3>
+<ul><li>
+26 V.S.A. § 910: an owner may do electrical work in their own freestanding single-unit residence and its outbuildings without a licence.
+</li><li>
+The Vermont Electrical Safety Rules exempt a single-family owner-occupied dwelling from the state work-notice and inspection process
+ (the exemption does not cover rentals). The work is still supposed to meet the adopted NEC.
+</li><li>
+Vermont's rules were reissued in 2023 and 2025. CHECK which NEC edition the 2025 rules adopt (2020 or 2023).
+</li></ul>
+<h3 id="research-the-power-source-and-panel-confirmed-by-the-owner-2026-10-06">The power source and "panel" (confirmed by the owner 2026-10-06)</h3>
+<p>The owners already have both the F2000 power station and the transfer switch (2026-10-07).</p>
+<ul><li>
+Anker SOLIX F2000: 120 V only, 2,400 W continuous (20 A). No 240 V. The cabin will never have utility power and probably no solar;
+ at most a bigger battery later (the F3000 is also 120 V, 30 A, and uses the same L5-30 inlet).
+</li><li>
+The "panel" is the Anker SOLIX 120V Transfer Switch, SKU B17B71A1: a Reliance Pro/Tran 2, 30 A, six 15 A single-pole circuits,
+ L5-30 inlet on the unit, wattmeters, metal cabinet for indoor surface mounting. About 7 3/4" x 11 1/4" x 4 1/2" deep
+ (size taken from sister models; CHECK the manual).
+</li><li>
+<b>Owner's plan:</b> the switch's wire whip ends in its own small junction box, and the breakers are jumpered: there is no main panel.
+ Read as: in the junction box each circuit's LOAD wire (red) is spliced to one branch circuit; the LINE wires (black, meant for a
+ utility breaker) are capped off individually; the whip's white is the common neutral for all six circuits; green is the ground.
+ The switches stay on GEN. The unit's own six 15 A breakers protect the branch circuits. CHECK this reading with whoever wires it.
+</li><li>
+Consequences:
+<ul><li>
+Everything starts at that junction box: six circuits, 15 A each, 14 AWG. Total limited by the battery (20 A now).
+</li><li>
+The induction burner (about 1,800 W, 15 A) needs a circuit to itself.
+</li><li>
+Junction box: six branch cables plus the whip's 14 conductors is a lot of fill. Use at least 6" x 6" x 4"; drawn as 8" x 8" x 4".
+</li><li>
+One shared neutral in the whip serves all six circuits. That is how the unit is built (it is sized for the 30 A inlet); do not add
+ any other shared-neutral arrangement downstream.
+</li><li>
+No AFCI protection is possible from these breakers. GFCI protection comes from GFCI receptacles at the first outlet of each circuit
+ that needs it (kitchen, bath, outdoor).
+</li><li>
+CHECK grounding: whether the F2000 bonds neutral to ground internally. Neutral and ground must be bonded in exactly one place.
+ With no service there is also no grounding electrode; ask the installer whether one is wanted for the outdoor circuits.
+</li><li>
+The unit stands 4 1/2" off the wall, so it cannot hide flat behind a painting. Modelled with the painting as the hinged door of a
+ shallow cabinet over it, open at the bottom for the battery cord.
+</li></ul>
+</li></ul>
+<h3 id="research-circuits-owner-2026-10-06">Circuits (owner, 2026-10-06)</h3>
+<ul><li>
+<b>One kitchen outlet on its own circuit</b> (K7, beside the burner spot on the back wall), in case an induction burner is used.
+</li><li>
+The owners are also considering <b>propane for cooking and hot water</b> instead, because everything electric is limited by battery size.
+ Not decided. If propane: the dedicated outlet stays (cheap, and useful for a kettle or toaster), K6 under the sink is no longer needed
+ for a water heater, and a tankless propane heater may still want a small 120 V supply or batteries for ignition (CHECK the model).
+</li><li>
+<b>Circuits, agreed 2026-10-06</b> (six 15 A circuits in the transfer switch):
+<ol><li>
+Dedicated kitchen outlet (K7).
+</li><li>
+Counter and bar outlets (K8, K9, K4), fridge (K2), optional under-sink outlet (K6), and the back landing outlet (X2, fed from K8's
+ protected side).
+</li><li>
+Living room, loft and front deck outlets: R7 on the porch side; R1, R2, R8, R6, L1 to L3 on the bank side; X1 fed from R6.
+</li><li>
+Bath: toilet outlet (R9), future vanity outlet box (F2), vanity sconces through S5.
+</li><li>
+All lights, indoors and out, through their switches.
+</li><li>
+Spare. (Could take the outdoor lights, so one tripped breaker does not darken everything.)
+ There is no separate outside circuit: each outdoor outlet is fed from the indoor outlet beside it.
+</li></ol>
+</li></ul>
+<h3 id="research-cable-routes-drawn-in-the-3d-model-s-framing-view-2026-10-06">Cable routes (drawn in the 3D model's framing view, 2026-10-06)</h3>
+<p>No runs under the floor (owner's decision).</p>
+<ul><li>
+<b>Kitchen route:</b> junction box, low inside the porch wall under the kitchen window sills (drilled through the short studs and the
+ bottoms of the stud packs), round the back corner, to the red door bay. Carries circuits 1 and 2, the lighting feed to S1, the dimmed
+ leg back to the kitchen tape driver, and the dimmed leg to the back-wall beam strip.
+</li><li>
+<b>Slider route:</b> junction box, low under the front pair of windows, to the slider box S2. Carries the lighting feed, circuit 3 as far
+ as the bench outlet, and switched legs back toward the panel bay (porch sconce over the panel, the cross-beam strip).
+</li><li>
+<b>Roof crossing:</b> up the open stud bay where the transfer switch is, across inside one rafter bay, along the top of the bank wall and
+ down in the bay at the foot of the ladder. Carries circuits 3, 4 and 5. MUST be done before the roof is insulated. Chosen over a
+ conduit on top of the exposed cross beam.
+</li><li>
+<b>Bank wall:</b> low along the wall both ways from the ladder bay (under the low window toward the back; round the front corner and under
+ the big front window to R6 and X1), and at loft level in the 6" strip between the loft floor and the loft window sills.
+</li><li>
+<b>Cabinet wall:</b> in from the bank wall along its hollow base in conduit, up the pantry's two back corners.
+</li><li>
+<b>Domes:</b> up from the slider box to the top plate, then surface conduit across the ceiling from the porch wall to both domes.
+</li><li>
+<b>Front deck sconce: removed 2026-10-06.</b> There was no good way to wire it: the post between the slider and the big window is solid, so
+ the only feed was up and over the upper windows inside the front wall and then down the outside of the post in surface conduit. The front
+ deck is lit by the porch-wall sconce at the front corner instead.
+</li></ul>
+<p>Switches: S1 red door = kitchen tape dimmer + back door light. S2 slider = domes + deck lights + beam strips dimmer. S4 = under-loft tape dimmer, on the cabinet wall's pantry panel by the couch. S5 = bath. S6 (foot of the ladder) and S3 (beside the bed) = loft light.</p>
+<p>Rough cable lengths measured off the model, before waste and the extra left in each box: circuit 1 about 18 ft, circuit 2 about 21 ft, circuit 3 about 100 ft, circuit 4 about 63 ft, lighting feeds about 87 ft, switched legs about 119 ft. About 410 ft in all. The run between the two loft-light switches needs 3-conductor cable. The electrical plan page has the full materials list.</p>
+<h3 id="research-routing-cable-through-framing">Routing cable through framing</h3>
+<ul><li>
+NM-B ("Romex") through bored holes in wood: keep the edge of the hole at least 1-1/4" from the nearest edge of the stud, or cover it
+ with a 1/16" steel nail plate (NEC 300.4(A)). In a 2x4 (3-1/2") a centred hole up to 1" just meets this.
+</li><li>
+Support: secure within 12" of each box (8" for a single-gang plastic box without a clamp) and at least every 4'-6" (NEC 334.30).
+ Passing through bored holes counts as support. Staple flat cable flat, not on edge.
+</li><li>
+Studs (IRC R602.6): holes up to 40% of stud width in bearing and exterior walls (60% in non-bearing, or if the stud is doubled);
+ hole edge at least 5/8" from the stud edge; notches up to 25% (bearing) or 40% (non-bearing).
+</li><li>
+Joists and rafters (IRC R502.8 / R802.7): holes no bigger than 1/3 of the depth, at least 2" from the top and bottom edges and from
+ other holes; notches no deeper than 1/6 of the depth, never in the middle third of the span.
+</li><li>
+Do not drill or notch headers (the owners have already ruled out the header between the windows and the transoms).
+</li></ul>
+<h3 id="research-cabin-specific-routing-problems">Cabin-specific routing problems</h3>
+<ul><li>
+<b>Loft floor = ceiling below.</b> The loft boards sit directly on exposed timber joists: there is no cavity. Under-loft lights, the bath
+ light box and anything fixed to the loft boards need either cable run on top of the joists in a routed channel under the loft
+ flooring, or surface raceway / conduit along the joists. NM cable cannot just be stapled exposed where it can be damaged.
+</li><li>
+<b>Roof.</b> The rafter bays will be insulated and then covered. All cable for the high-ceiling lights must be in before insulation.
+ Run along the side of a rafter or through holes within the limits above.
+</li><li>
+<b>Exposed timber beams and posts.</b> Strip lights on the beams need a concealed feed: drilled down through the beam at the wall, or a
+ shallow routed groove on the top face (CHECK with the builder before cutting a structural timber).
+</li><li>
+<b>Cabinet wall.</b> Devices R8 and S5 sit in the pantry's side panel; their cable has to drop from the joist line inside the pantry
+ behind a cover.
+</li><li>
+<b>Exterior walls</b> are framed walls with sheathing and a membrane outside: drill studs in the middle, seal any penetration to outside
+ lights and outlets.
+</li></ul>
+<h3 id="research-dwelling-requirements-that-shape-the-circuits-nec-2020-unless-noted">Dwelling requirements that shape the circuits (NEC 2020 unless noted)</h3>
+<ul><li>
+Receptacle spacing 210.52(A): no point along a wall more than 6' from a receptacle (so at most 12' apart), any wall 2' or wider counts.
+</li><li>
+Kitchen 210.52(B),(C): two or more 20 A small-appliance circuits; counter receptacles so no point is more than 2' from one
+ (about 4' apart); all GFCI.
+</li><li>
+Bathroom 210.11(C)(3), 210.52(D): a 20 A circuit for bath receptacles; a receptacle within 3' of the basin; GFCI.
+</li><li>
+GFCI 210.8: bathrooms, kitchen counters, within 6' of a sink, outdoors.
+</li><li>
+AFCI 210.12: essentially every 120 V 15/20 A circuit in living areas, kitchens, bedrooms.
+</li><li>
+Neutral at every switch box 404.2(C): so no old-style two-wire switch loops; run the feed to the switch first, or 3-wire to it.
+</li><li>
+Three-way switching (the loft light, from the foot of the ladder and from beside the bed): 14-3 travellers between the two switch
+ boxes. This is a single circuit, so it is fine on a 120 V-only panel.
+</li><li>
+Box fill 314.16: count conductors, devices, clamps and grounds; the three-gang box at the slider (S2) needs a deep box.
+</li><li>
+Outdoor boxes and covers weatherproof; in-use covers on outdoor receptacles.
+</li><li>
+Smoke and CO alarms: required in a dwelling (hardwired with battery backup in new work). Not yet on the plan. Wood stove = CO alarm.
+</li><li>
+Panel working space 110.26: 30" wide, 36" deep, 6'-6" high clear. Already kept in the layout.
+</li></ul>
+<h3 id="research-sources">Sources</h3>
+<ul><li>
+<a href="https://legislature.vermont.gov/statutes/fullchapter/26/015">legislature.vermont.gov</a>
+</li><li>
+<a href="https://firesafety.vermont.gov/sites/firesafety/files/Rules/2025%20Vermont%20Electrical%20Safety%20Rules.pdf">firesafety.vermont.gov</a>
+</li><li>
+<a href="https://wireref.com/nec/article-300-wiring-methods/">wireref.com</a>
+</li><li>
+<a href="https://wireref.com/nec/article-334-nm-cable/">wireref.com</a>
+</li><li>
+<a href="https://inspectapedia.com/structure/Wood-Joist-Stud-Boring-Notching-Codes.php">inspectapedia.com</a>
+</li><li>
+<a href="https://buildingadvisor.com/notching-and-boring-joists/">buildingadvisor.com</a>
+</li><li>
+<a href="https://backuppowerhub.com/anker-solix-transfer-switch-guide/">backuppowerhub.com</a>
+</li><li>
+<a href="https://support.ankersolix.com/s/article/Anker-SOLIX-F2000-Portable-Power-Station-PowerHouse-767-USER-MANUAL">support.ankersolix.com</a>
+</li><li>
+<a href="https://www.stpaul.gov/sites/default/files/2020-12/DSI.Bldg_Electrical_Checklist%20Dwelling%20Unit%20Rough%20In.pdf">stpaul.gov</a>
+</li></ul>
+</div>
 <script id="matdata" type="application/json">{"sections": [{"name": "Power", "rows": [{"sku": "xfer", "name": "Anker SOLIX 120V transfer switch", "why": "already owned. The \"panel\": six 15 A circuits, L5-30 inlet for the battery", "qty": 1, "unit": "each", "price": 0, "bundle": "", "grp": "", "fx": false}, {"sku": "batt", "name": "Anker SOLIX F2000 power station", "why": "already owned", "qty": 1, "unit": "each", "price": 0, "bundle": "", "grp": "", "fx": false}, {"sku": "jbox8", "name": "8\" x 8\" x 4\" steel junction box with cover", "why": "under the transfer switch: its wire whip ends here and the six circuits start here", "qty": 1, "unit": "each", "price": 32, "bundle": "", "grp": "", "fx": false}, {"sku": "lever", "name": "Lever wire connectors, assorted box", "why": "splices in the junction box and at fixtures", "qty": 1, "unit": "box", "price": 30, "bundle": "", "grp": "", "fx": false}, {"sku": "gnd", "name": "Grounding pigtails and green screws", "why": "metal boxes", "qty": 1, "unit": "pack", "price": 8, "bundle": "", "grp": "", "fx": false}]}, {"name": "Cable and rough-in", "rows": [{"sku": "nm250", "name": "14/2 NM-B cable, 250 ft coil", "why": "all six circuits (measured 387 ft, plus waste and the extra left in each box: about 539 ft)", "qty": 2, "unit": "coil", "price": 115, "bundle": "", "grp": "", "fx": false}, {"sku": "nm100", "name": "14/2 NM-B cable, 50 ft coil", "why": "the rest of the same run", "qty": 1, "unit": "coil", "price": 35, "bundle": "", "grp": "", "fx": false}, {"sku": "lv182", "name": "18/2 low-voltage wire, 100 ft", "why": "from each LED driver to its tape", "qty": 1, "unit": "spool", "price": 28, "bundle": "", "grp": "", "fx": false}, {"sku": "staple", "name": "Cable staples", "why": "every 4 ft 6 in and within 8 in of each box", "qty": 1, "unit": "box", "price": 7, "bundle": "", "grp": "", "fx": false}, {"sku": "nailpl", "name": "Steel nail plates", "why": "wherever a drilled hole is within 1 1/4 in of the stud face", "qty": 24, "unit": "each", "price": 0.75, "bundle": "", "grp": "", "fx": false}, {"sku": "clamp", "name": "Cable clamps for metal boxes, 10-pack", "why": "junction box and fixture boxes", "qty": 2, "unit": "pack", "price": 7, "bundle": "", "grp": "", "fx": false}, {"sku": "seal", "name": "Exterior sealant", "why": "around every cable or box that goes through to the outside", "qty": 1, "unit": "tube", "price": 9, "bundle": "", "grp": "", "fx": false}, {"sku": "box1", "name": "Single-gang wall box", "why": "outlets R1, R6, K2, L3, R8, R7, L1, L2, R9, K7, K8, K9, K4", "qty": 13, "unit": "each", "price": 2, "bundle": "", "grp": "", "fx": false}, {"sku": "box2", "name": "Two-gang wall box", "why": "outlet R2 and switch S1", "qty": 2, "unit": "each", "price": 4.5, "bundle": "", "grp": "", "fx": false}, {"sku": "box3", "name": "Three-gang wall box", "why": "switch S2 at the slider", "qty": 1, "unit": "each", "price": 7, "bundle": "", "grp": "", "fx": false}]}, {"name": "Outlets", "rows": [{"sku": "dup", "name": "15 A tamper-resistant duplex outlet", "why": "R1, R6, K2, L3; two in R2", "qty": 6, "unit": "each", "price": 3.5, "bundle": "", "grp": "", "fx": false}, {"sku": "usb", "name": "Duplex outlet with USB charging", "why": "R8, R7, L1, L2", "qty": 4, "unit": "each", "price": 26, "bundle": "usb", "grp": "", "fx": false}, {"sku": "dup", "name": "15 A tamper-resistant duplex outlet", "why": "plain outlets in place of the USB ones (R8, R7, L1, L2)", "qty": 4, "unit": "each", "price": 3.5, "bundle": "nousb", "grp": "", "fx": false}, {"sku": "gfci", "name": "15 A GFCI outlet", "why": "R9, K7, K8, K9, K4", "qty": 5, "unit": "each", "price": 21, "bundle": "", "grp": "", "fx": false}, {"sku": "plate1", "name": "Single-gang outlet plate", "why": "one per single outlet", "qty": 13, "unit": "each", "price": 1.5, "bundle": "", "grp": "", "fx": false}, {"sku": "plate2", "name": "Two-gang outlet plate", "why": "R2", "qty": 1, "unit": "each", "price": 3, "bundle": "", "grp": "", "fx": false}, {"sku": "gfci", "name": "15 A GFCI outlet", "why": "optional outlet under the sink (K6)", "qty": 1, "unit": "each", "price": 21, "bundle": "undersink", "grp": "", "fx": false}, {"sku": "box1", "name": "Single-gang wall box", "why": "for K6", "qty": 1, "unit": "each", "price": 2, "bundle": "undersink", "grp": "", "fx": false}, {"sku": "plate1", "name": "Single-gang outlet plate", "why": "for K6", "qty": 1, "unit": "each", "price": 1.5, "bundle": "undersink", "grp": "", "fx": false}, {"sku": "wrgfci", "name": "Weather-resistant GFCI outlet", "why": "front deck (X1)", "qty": 1, "unit": "each", "price": 27, "bundle": "outdoor", "grp": "", "fx": false}, {"sku": "wrdup", "name": "Weather-resistant duplex outlet", "why": "back landing (X2), protected by the counter GFCI that feeds it", "qty": 1, "unit": "each", "price": 7, "bundle": "outdoor", "grp": "", "fx": false}, {"sku": "wpbox", "name": "Weatherproof outlet box", "why": "X1 and X2", "qty": 2, "unit": "each", "price": 11, "bundle": "outdoor", "grp": "", "fx": false}, {"sku": "inuse", "name": "In-use (\"bubble\") outlet cover", "why": "X1 and X2", "qty": 2, "unit": "each", "price": 16, "bundle": "outdoor", "grp": "", "fx": false}]}, {"name": "Switch plates shared by several lights", "rows": [{"sku": "splate2", "name": "Two-gang switch plate", "why": "S1 at the back door: kitchen tape dimmer and back door light", "qty": 1, "unit": "each", "price": 3, "bundle": "", "grp": "", "fx": false}, {"sku": "splate3", "name": "Three-gang switch plate", "why": "S2 at the slider: domes, porch-wall lights, beam strips dimmer", "qty": 1, "unit": "each", "price": 5, "bundle": "", "grp": "", "fx": false}]}, {"name": "Lights", "rows": [{"sku": "dome", "name": "Dome shade ceiling light", "why": "the two main lights (fixture not chosen yet)", "qty": 2, "unit": "each", "price": 120, "bundle": "", "grp": "Dome lights", "fx": true}, {"sku": "bulb", "name": "2700 K LED bulb", "why": "one per dome", "qty": 2, "unit": "each", "price": 4, "bundle": "", "grp": "Dome lights", "fx": false}, {"sku": "oct", "name": "4\" metal octagon box", "why": "one at each dome, on the conduit", "qty": 2, "unit": "each", "price": 5, "bundle": "", "grp": "Dome lights", "fx": false}, {"sku": "emt", "name": "1/2\" EMT conduit, 10 ft", "why": "across the ceiling from the porch wall to both domes", "qty": 2, "unit": "stick", "price": 9, "bundle": "", "grp": "Dome lights", "fx": false}, {"sku": "emtfit", "name": "EMT connectors, couplings and straps", "why": "for that conduit", "qty": 1, "unit": "set", "price": 18, "bundle": "", "grp": "Dome lights", "fx": false}, {"sku": "sw1", "name": "Single-pole switch", "why": "at the slider (S2)", "qty": 1, "unit": "each", "price": 4.5, "bundle": "", "grp": "Dome lights", "fx": false}, {"sku": "tape", "name": "LED tape, 24 V, 2700 K, 16.4 ft reel", "why": "12'-10\" over the counter and under the shelves", "qty": 1, "unit": "reel", "price": 55, "bundle": "", "grp": "Kitchen tape", "fx": true}, {"sku": "chan", "name": "Aluminium channel with diffuser, 1 m", "why": "holds the tape", "qty": 4, "unit": "piece", "price": 11, "bundle": "", "grp": "Kitchen tape", "fx": false}, {"sku": "driver", "name": "Dimmable 24 V LED driver, about 60 W", "why": "in the sink cabinet", "qty": 1, "unit": "each", "price": 55, "bundle": "", "grp": "Kitchen tape", "fx": false}, {"sku": "box4", "name": "4\" square box with cover", "why": "for the driver connection", "qty": 1, "unit": "each", "price": 6, "bundle": "", "grp": "Kitchen tape", "fx": false}, {"sku": "dim", "name": "LED dimmer", "why": "at the back door (S1)", "qty": 1, "unit": "each", "price": 32, "bundle": "", "grp": "Kitchen tape", "fx": false}, {"sku": "vanity", "name": "Clear-glass vanity sconce", "why": "already owned", "qty": 2, "unit": "each", "price": 0, "bundle": "", "grp": "Vanity sconces", "fx": true}, {"sku": "bulb", "name": "2700 K LED bulb", "why": "one per sconce", "qty": 2, "unit": "each", "price": 4, "bundle": "", "grp": "Vanity sconces", "fx": false}, {"sku": "fbox", "name": "Round fixture box", "why": "one behind each sconce", "qty": 2, "unit": "each", "price": 4, "bundle": "", "grp": "Vanity sconces", "fx": false}, {"sku": "sw1", "name": "Single-pole switch", "why": "in the bath corner (S5)", "qty": 1, "unit": "each", "price": 4.5, "bundle": "", "grp": "Vanity sconces", "fx": false}, {"sku": "box1", "name": "Single-gang wall box", "why": "switch S5", "qty": 1, "unit": "each", "price": 2, "bundle": "", "grp": "Vanity sconces", "fx": false}, {"sku": "splate1", "name": "Single-gang switch plate", "why": "S5", "qty": 1, "unit": "each", "price": 1.5, "bundle": "", "grp": "Vanity sconces", "fx": false}, {"sku": "osconce", "name": "Outdoor wall sconce", "why": "back door and two on the porch wall (not chosen yet)", "qty": 3, "unit": "each", "price": 60, "bundle": "", "grp": "Outdoor lights", "fx": true}, {"sku": "bulb", "name": "2700 K LED bulb", "why": "one per sconce", "qty": 3, "unit": "each", "price": 4, "bundle": "", "grp": "Outdoor lights", "fx": false}, {"sku": "oblock", "name": "Exterior fixture box or mounting block", "why": "one behind each sconce", "qty": 3, "unit": "each", "price": 12, "bundle": "", "grp": "Outdoor lights", "fx": false}, {"sku": "sw1", "name": "Single-pole switch", "why": "back door light (S1) and porch-wall lights (S2)", "qty": 2, "unit": "each", "price": 4.5, "bundle": "", "grp": "Outdoor lights", "fx": false}, {"sku": "tape", "name": "LED tape, 24 V, 2700 K, 16.4 ft reel", "why": "17'-7\" under the joist and the cabinet wall shelves", "qty": 2, "unit": "reel", "price": 55, "bundle": "ltape", "grp": "Bookshelf tape", "fx": true}, {"sku": "chan", "name": "Aluminium channel with diffuser, 1 m", "why": "holds the tape", "qty": 6, "unit": "piece", "price": 11, "bundle": "ltape", "grp": "Bookshelf tape", "fx": false}, {"sku": "driver", "name": "Dimmable 24 V LED driver, about 60 W", "why": "in the pantry", "qty": 1, "unit": "each", "price": 55, "bundle": "ltape", "grp": "Bookshelf tape", "fx": false}, {"sku": "box4", "name": "4\" square box with cover", "why": "for the driver connection", "qty": 1, "unit": "each", "price": 6, "bundle": "ltape", "grp": "Bookshelf tape", "fx": false}, {"sku": "dim", "name": "LED dimmer", "why": "on the cabinet wall (S4)", "qty": 1, "unit": "each", "price": 32, "bundle": "ltape", "grp": "Bookshelf tape", "fx": false}, {"sku": "box1", "name": "Single-gang wall box", "why": "switch S4", "qty": 1, "unit": "each", "price": 2, "bundle": "ltape", "grp": "Bookshelf tape", "fx": false}, {"sku": "splate1", "name": "Single-gang switch plate", "why": "S4", "qty": 1, "unit": "each", "price": 1.5, "bundle": "ltape", "grp": "Bookshelf tape", "fx": false}, {"sku": "tape", "name": "LED tape, 24 V, 2700 K, 16.4 ft reel", "why": "10'-5\" on top of the two beams", "qty": 1, "unit": "reel", "price": 55, "bundle": "beam", "grp": "Beam strips", "fx": true}, {"sku": "driver", "name": "Dimmable 24 V LED driver, about 60 W", "why": "one for each beam", "qty": 2, "unit": "each", "price": 55, "bundle": "beam", "grp": "Beam strips", "fx": false}, {"sku": "box4", "name": "4\" square box with cover", "why": "for the driver connections", "qty": 2, "unit": "each", "price": 6, "bundle": "beam", "grp": "Beam strips", "fx": false}, {"sku": "dim", "name": "LED dimmer", "why": "at the slider (S2)", "qty": 1, "unit": "each", "price": 32, "bundle": "beam", "grp": "Beam strips", "fx": false}, {"sku": "sconce", "name": "Indoor wall light", "why": "near the top of the ladder (not chosen yet)", "qty": 1, "unit": "each", "price": 60, "bundle": "loftlight", "grp": "Loft wall light", "fx": true}, {"sku": "bulb", "name": "2700 K LED bulb", "why": "for it", "qty": 1, "unit": "each", "price": 4, "bundle": "loftlight", "grp": "Loft wall light", "fx": false}, {"sku": "fbox", "name": "Round fixture box", "why": "behind it", "qty": 1, "unit": "each", "price": 4, "bundle": "loftlight", "grp": "Loft wall light", "fx": false}, {"sku": "sw3", "name": "Three-way switch", "why": "foot of the ladder (S6) and beside the bed (S3)", "qty": 2, "unit": "each", "price": 7.5, "bundle": "loftlight", "grp": "Loft wall light", "fx": false}, {"sku": "box1", "name": "Single-gang wall box", "why": "S3 and S6", "qty": 2, "unit": "each", "price": 2, "bundle": "loftlight", "grp": "Loft wall light", "fx": false}, {"sku": "splate1", "name": "Single-gang switch plate", "why": "S3 and S6", "qty": 2, "unit": "each", "price": 1.5, "bundle": "loftlight", "grp": "Loft wall light", "fx": false}, {"sku": "nm143", "name": "14/3 NM-B cable, 50 ft coil", "why": "between the two switches (about 30 ft with waste)", "qty": 1, "unit": "coil", "price": 60, "bundle": "loftlight", "grp": "Loft wall light", "fx": false}, {"sku": "scissor", "name": "Plug-in scissor-arm sconce", "why": "either end of the couch", "qty": 2, "unit": "each", "price": 90, "bundle": "plugin", "grp": "Plug-in lamps (not wired in)", "fx": true}, {"sku": "swing", "name": "Plug-in swing-arm lamp", "why": "either side of the bed", "qty": 2, "unit": "each", "price": 50, "bundle": "plugin", "grp": "Plug-in lamps (not wired in)", "fx": true}, {"sku": "bulb", "name": "2700 K LED bulb", "why": "one per lamp", "qty": 4, "unit": "each", "price": 4, "bundle": "plugin", "grp": "Plug-in lamps (not wired in)", "fx": false}, {"sku": "cordcov", "name": "Metal cord cover", "why": "from each couch sconce down to its outlet", "qty": 2, "unit": "each", "price": 12, "bundle": "plugin", "grp": "Plug-in lamps (not wired in)", "fx": false}]}, {"name": "Future bath rough-in", "rows": [{"sku": "fbox", "name": "Round fixture box", "why": "F1, in the ceiling over the future shower", "qty": 1, "unit": "each", "price": 4, "bundle": "future", "grp": "", "fx": false}, {"sku": "box1", "name": "Single-gang wall box", "why": "F2, future vanity outlet", "qty": 1, "unit": "each", "price": 2, "bundle": "future", "grp": "", "fx": false}, {"sku": "blank", "name": "Blank cover", "why": "F1 and F2 until the bath is built", "qty": 2, "unit": "each", "price": 1.5, "bundle": "future", "grp": "", "fx": false}]}, {"name": "Safety", "rows": [{"sku": "alarm", "name": "Smoke and carbon monoxide alarm, 10-year battery", "why": "one on the main floor, one in the loft (wood stove). Not drawn on the plan yet", "qty": 2, "unit": "each", "price": 45, "bundle": "alarms", "grp": "", "fx": false}]}], "bundles": [{"id": "usb", "name": "USB charging outlets (untick for plain ones)", "on": true, "alt": "nousb", "hide": false}, {"id": "nousb", "name": "", "on": false, "alt": "", "hide": true}, {"id": "undersink", "name": "Outlet under the sink", "on": false, "alt": "", "hide": false}, {"id": "outdoor", "name": "Outdoor outlets", "on": true, "alt": "", "hide": false}, {"id": "ltape", "name": "Bookshelf tape", "on": true, "alt": "", "hide": false}, {"id": "beam", "name": "Beam strips", "on": true, "alt": "", "hide": false}, {"id": "loftlight", "name": "Loft wall light", "on": true, "alt": "", "hide": false}, {"id": "plugin", "name": "Plug-in lamps", "on": true, "alt": "", "hide": false}, {"id": "future", "name": "Future bath rough-in", "on": true, "alt": "", "hide": false}, {"id": "alarms", "name": "Smoke and CO alarms", "on": true, "alt": "", "hide": false}]}</script>
 </div>
 <script>
