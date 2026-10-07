@@ -44,9 +44,13 @@
   td.n { font-family: var(--mono); font-size: 13px; white-space: nowrap; }
   code { font-family: var(--mono); font-size: 12.5px; }
   .research { margin-top: 48px; border-top: 2px solid var(--ink); } .research h4 { font-size: 15px; margin: 18px 0 4px; } .research a { color: var(--rec); overflow-wrap: anywhere; }
-  .sitenav { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0 0 18px; font-family: var(--mono); font-size: 13px; }
-  .sitenav a { color: var(--ink); text-decoration: none; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 2px; background: var(--panel); }
-  .sitenav a:hover { border-color: var(--ink-2); } .sitenav a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* site nav, the same on all three pages: upper left, the current page reads as the title */
+  .sitenav { display: flex; align-items: baseline; gap: 4px 18px; flex-wrap: wrap; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; }
+  .sitenav a { font-size: 19px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .sitenav a:hover { color: var(--ink); border-bottom-color: var(--rule); }
+  .sitenav a[aria-current] { color: var(--ink); border-bottom-color: var(--rec); }
+  body { margin: 0; }
+  .topbar { padding: 8px 16px; border-bottom: 1px solid var(--rule); background: var(--paper); }
   tr.grp td { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); background: var(--panel); padding: 5px 8px; border-bottom: 1px solid var(--rule); }
   h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: 0.02em; margin: 26px 0 6px; text-transform: uppercase; }
   .r { text-align: right; } td.r, th.r { padding-right: 0; padding-left: 12px; }
@@ -62,8 +66,8 @@
   #mat input[type=checkbox], .bundles input { width: 16px; height: 16px; accent-color: var(--rec); }
   @media (max-width: 720px) { header { grid-template-columns: 1fr; } h1 { font-size: 34px; } .tools .hint { margin-left: 0; } }
 </style>
+<div class="topbar"><nav class="sitenav" aria-label="Stockbridge Cabin pages"><a data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener">3D model</a><a data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener" aria-current="page">Electrical</a><a data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener">Notes</a></nav></div>
 <div class="wrap">
-<div class="sitenav" role="navigation" aria-label="Pages"><a data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener">3D model</a><a data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener" aria-current="page">Electrical plan</a><a data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener">Building notes</a></div>
 <header>
   <div>
     <h1>Stockbridge Cabin Electrical Plan</h1>

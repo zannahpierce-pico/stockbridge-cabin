@@ -47,7 +47,11 @@
   .key #pick { display: block; margin-top: 4px; color: var(--ink-2); min-height: 1.3em; }
   .shareonly, .share .own { display: none !important; }
   .share .shareonly { display: inline-block !important; }
-  a.uibtn { text-decoration: none; } .navlinks a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* site nav, the same on all three pages: upper left, the current page reads as the title */
+  .sitenav { display: flex; align-items: baseline; gap: 4px 18px; flex-wrap: wrap; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; }
+  .sitenav a { font-size: 19px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .sitenav a:hover { color: var(--ink); border-bottom-color: var(--rule); }
+  .sitenav a[aria-current] { color: var(--ink); border-bottom-color: var(--accent, #a3271d); }
   #help { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 4; width: min(430px, calc(100vw - 32px)); box-sizing: border-box; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
   #help b { display: block; margin-top: 6px; } #help b:first-child { margin-top: 0; } #help button { margin-top: 10px; }
   #acts { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
@@ -65,13 +69,12 @@
   @media (max-width: 700px) { h1 { font-size: 18px; } }
 </style>
 <div class="bar">
-  <h1>Stockbridge Cabin</h1>
+  <nav class="sitenav" aria-label="Stockbridge Cabin pages"><a data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener" aria-current="page">3D model</a><a data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener">Electrical</a><a data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener">Notes</a></nav>
   <div class="seg own" id="mode" role="group" aria-label="Navigation mode"><button data-m="orbit" id="m_orbit" class="on" title="Turn the whole model around from outside">Orbit</button><button data-m="walk" id="m_walk" title="Walk through at eye height">Walk</button></div>
   <button type="button" class="pop uibtn" data-p="p_views" id="b_views">Views</button>
   <button type="button" class="pop uibtn" data-p="p_layers" id="b_layers">Show / hide</button>
   <button type="button" class="pop uibtn" data-p="p_furn" id="b_furn">Options</button>
   <button type="button" class="pop uibtn" data-p="p_lights" id="b_lights">Lights</button>
-  <button type="button" class="pop uibtn" data-p="p_nav" id="b_nav">Pages</button>
   <button type="button" class="uibtn on" id="b_notes" aria-pressed="true" title="Show or hide the owners' notes and questions in the model">Notes: on</button>
   <button type="button" class="uibtn" id="b_help">How to move</button>
 </div>
@@ -84,10 +87,6 @@
   <b>Yellow notes</b>These are our notes and questions about the plan. Click one to read it. The Notes button in the bar turns them off.
   <b>Menus</b>Views jumps to a room. Show / hide takes off the roof or a wall, and shows the wall framing and wiring. Options tries wall and ceiling boards, and couch, rug and stool choices. Lights switches to night.
   <br><button type="button" class="uibtn" id="help_ok">Got it</button>
-</div>
-<div class="panel" id="p_nav" hidden>
-  <span class="ptitle">Stockbridge Cabin</span>
-  <div class="views navlinks"><a class="uibtn" data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener" aria-current="page">3D model</a><a class="uibtn" data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener">Electrical plan</a><a class="uibtn" data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener">Building notes</a></div>
 </div>
 <div class="panel" id="p_views" hidden>
   <span class="ptitle">Outside</span>

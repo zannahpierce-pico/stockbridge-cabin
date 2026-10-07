@@ -13,9 +13,9 @@
   header { border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 18px; }
   h1 { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; margin: 0; letter-spacing: 0.01em; }
   .sub { color: var(--ink-2); margin: 8px 0 0; max-width: 68ch; }
-  nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px 28px; background: var(--panel); padding: 14px 18px; border-radius: 3px; }
-  nav b { font-family: var(--display); font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; display: block; margin-bottom: 2px; }
-  nav a { display: block; color: var(--ink); text-decoration: none; padding: 1px 0; font-size: 14px; } nav a:hover { color: var(--accent); text-decoration: underline; }
+  nav.toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px 28px; background: var(--panel); padding: 14px 18px; border-radius: 3px; }
+  nav.toc b { font-family: var(--display); font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+  nav.toc a { display: block; color: var(--ink); text-decoration: none; padding: 1px 0; font-size: 14px; } nav.toc a:hover { color: var(--accent); text-decoration: underline; }
   h2 { font-family: var(--display); font-weight: 700; font-size: 32px; letter-spacing: 0.02em; text-transform: uppercase; margin: 52px 0 6px; padding-top: 12px; border-top: 2px solid var(--ink); }
   h3 { font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; margin: 30px 0 6px; }
   h4 { font-size: 15.5px; margin: 20px 0 4px; }
@@ -27,18 +27,22 @@
   th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 600; padding: 6px 12px 6px 0; border-bottom: 1px solid var(--ink); }
   td { padding: 6px 12px 6px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   .note { background: var(--panel); padding: 12px 16px; border-left: 3px solid var(--accent); max-width: 76ch; margin-top: 18px; font-size: 14.5px; }
-  .sitenav { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0 0 18px; font-family: var(--mono); font-size: 13px; }
-  .sitenav a { color: var(--ink); text-decoration: none; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 2px; background: var(--panel); }
-  .sitenav a:hover { border-color: var(--ink-2); } .sitenav a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* site nav, the same on all three pages: upper left, the current page reads as the title */
+  .sitenav { display: flex; align-items: baseline; gap: 4px 18px; flex-wrap: wrap; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; }
+  .sitenav a { font-size: 19px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .sitenav a:hover { color: var(--ink); border-bottom-color: var(--rule); }
+  .sitenav a[aria-current] { color: var(--ink); border-bottom-color: var(--accent, #a3271d); }
+  body { margin: 0; }
+  .topbar { padding: 8px 16px; border-bottom: 1px solid var(--rule); background: var(--paper); }
   @media (max-width: 720px) { h1 { font-size: 34px; } h2 { font-size: 26px; } }
 </style>
+<div class="topbar"><nav class="sitenav" aria-label="Stockbridge Cabin pages"><a data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener">3D model</a><a data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener">Electrical</a><a data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener" aria-current="page">Notes</a></nav></div>
 <div class="wrap">
-<div class="sitenav" role="navigation" aria-label="Pages"><a data-s="./" href="https://claude.ai/artifact/7FB9jLeVE7kTGVP4EWj6WU" target="_blank" rel="noopener">3D model</a><a data-s="electrical-plan.html" href="https://claude.ai/artifact/7wsmr2LggrhqGaoRTbb8hp" target="_blank" rel="noopener">Electrical plan</a><a data-s="building-notes.html" href="https://claude.ai/artifact/WXEhz3HaggtETQe6U7bStx" target="_blank" rel="noopener" aria-current="page">Building notes</a></div>
 <header>
   <h1>Stockbridge Cabin Building Notes</h1>
   <p class="sub">Our working notes: sizes, products we are looking at, things we tried and set aside, and the research behind the wiring. Measurements come from the 3D model and from photos, so tape anything that has to fit within an inch or two.</p>
 </header>
-<nav><div><b><a href="#n0">Sizes and things to buy</a></b><a href="#n0-rugs-sizes-chosen-in-the-3d-model">Rugs: sizes chosen (in the 3D model)</a><a href="#n0-rugs-tried-and-set-aside">Rugs: tried and set aside</a><a href="#n0-rugs-suggested-not-yet-chosen">Rugs: suggested, not yet chosen</a><a href="#n0-stools">Stools</a><a href="#n0-kitchen">Kitchen</a><a href="#n0-bath-door">Bath door</a><a href="#n0-baskets-for-the-cabinet-wall">Baskets for the cabinet wall</a><a href="#n0-entry-shoe-rack-and-coat-hooks-on-the-future-bath-wall-facing-the-kitchen">Entry: shoe rack and coat hooks (on the future bath wall, facing the kitchen)</a><a href="#n0-toilet-box-until-the-bath-is-built">Toilet box (until the bath is built)</a><a href="#n0-loft">Loft</a><a href="#n0-glass-blocks-top-of-the-cabinet-wall">Glass blocks (top of the cabinet wall)</a><a href="#n0-deck-gates-front-and-back-stairs">Deck gates (front and back stairs)</a></div></nav>
+<nav class="toc" aria-label="On this page"><div><b><a href="#n0">Sizes and things to buy</a></b><a href="#n0-rugs-sizes-chosen-in-the-3d-model">Rugs: sizes chosen (in the 3D model)</a><a href="#n0-rugs-tried-and-set-aside">Rugs: tried and set aside</a><a href="#n0-rugs-suggested-not-yet-chosen">Rugs: suggested, not yet chosen</a><a href="#n0-stools">Stools</a><a href="#n0-kitchen">Kitchen</a><a href="#n0-bath-door">Bath door</a><a href="#n0-baskets-for-the-cabinet-wall">Baskets for the cabinet wall</a><a href="#n0-entry-shoe-rack-and-coat-hooks-on-the-future-bath-wall-facing-the-kitchen">Entry: shoe rack and coat hooks (on the future bath wall, facing the kitchen)</a><a href="#n0-toilet-box-until-the-bath-is-built">Toilet box (until the bath is built)</a><a href="#n0-loft">Loft</a><a href="#n0-glass-blocks-top-of-the-cabinet-wall">Glass blocks (top of the cabinet wall)</a><a href="#n0-deck-gates-front-and-back-stairs">Deck gates (front and back stairs)</a></div></nav>
 <h2 id="n0">Sizes and things to buy</h2>
 <p>Rugs, stools, doors, storage and deck gates: the size to order, and the space each one has to fit. Room measurements come from the model (SketchUp geometry plus photo estimates), so tape the space before ordering anything that fits within an inch or two.</p>
 <h3 id="n0-rugs-sizes-chosen-in-the-3d-model">Rugs: sizes chosen (in the 3D model)</h3>
