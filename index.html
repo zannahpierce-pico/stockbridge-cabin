@@ -130,9 +130,9 @@
 </div>
 <div class="panel" id="p_furn" hidden>
   <span class="ptitle">Inside wall boards</span>
-  <div class="views" id="wallsw"><button type="button" data-k="dir" data-v="h">Horizontal</button><button type="button" data-k="dir" data-v="v">Vertical</button><span style="width:10px"></span><button type="button" data-k="fin" data-v="white">White</button><button type="button" data-k="fin" data-v="natural">Natural wood</button></div>
+  <div class="views" id="wallsw"><button type="button" data-k="dir" data-v="h">Horizontal</button><button type="button" data-k="dir" data-v="v">Vertical</button><span style="width:10px"></span><button type="button" data-k="fin" data-v="white">Whitewashed</button><button type="button" data-k="fin" data-v="natural">Natural wood</button></div>
   <span class="ptitle">Ceiling boards</span>
-  <div class="views" id="ceilfsw"><button type="button" data-k="cdir" data-v="l" title="Boards run the length of the cabin, front to back">Lengthwise</button><button type="button" data-k="cdir" data-v="s" title="Boards run up the slope, from the low wall to the tall wall">Up the slope</button><span style="width:10px"></span><button type="button" data-k="ceil" data-v="natural">Natural wood</button><button type="button" data-k="ceil" data-v="white">White</button></div>
+  <div class="views" id="ceilfsw"><button type="button" data-k="cdir" data-v="l" title="Boards run the length of the cabin, front to back">Lengthwise</button><button type="button" data-k="cdir" data-v="s" title="Boards run up the slope, from the low wall to the tall wall">Up the slope</button><span style="width:10px"></span><button type="button" data-k="ceil" data-v="natural">Natural wood</button><button type="button" data-k="ceil" data-v="white">Painted white</button></div>
   <span class="ptitle">Couch fabric</span>
   <div class="swatches" id="couchsw">
     <button type="button" data-c="#6f7a45" data-n="Olive" title="Olive" class="on"></button>
@@ -301,9 +301,9 @@
   }
   var T = {
     siding: boards(31, 50, 66, 0.5, { long: true }),
-    whitewash: boards(42, 10, 88, 0.5, { long: true, plain: true, vary: 3, joint: 'rgba(120,110,95,0.22)' }),
+    whitewash: boards(36, 20, 84, 0.5, { long: true, vary: 5, joint: 'rgba(110,90,65,0.3)' }),      // whitewashed boards: a thin white coat with the wood tone and grain showing through
     wallnat: boards(34, 46, 70, 0.5, { long: true, vary: 6 }),               // interior wall boards left natural
-    ceilnat: boards(34, 48, 68, 0.5, { long: true, vary: 6 }), ceilwhite: boards(42, 10, 88, 0.5, { long: true, plain: true, vary: 3, joint: 'rgba(120,110,95,0.22)' }),   // ceiling boards, natural or painted white
+    ceilnat: boards(34, 48, 68, 0.5, { long: true, vary: 6 }), ceilwhite: boards(45, 3, 97, 0.5, { long: true, plain: true, vary: 1.5, joint: 'rgba(120,120,115,0.2)' }),   // ceiling boards, natural or painted white
     deck: boards(42, 48, 63, 0.46, { long: true }), shingle: shingles(), fire: flames(), leaf: mottle('#7d6a4b', ['rgba(150,96,52,0.35)', 'rgba(96,84,56,0.4)', 'rgba(92,110,62,0.3)', 'rgba(170,120,70,0.25)'], ['rgba(190,130,70,0.5)', 'rgba(60,48,34,0.4)']), moss: mottle('#3f5536', ['rgba(44,70,44,0.55)', 'rgba(86,120,62,0.45)', 'rgba(30,48,34,0.5)', 'rgba(104,96,60,0.3)', 'rgba(70,104,56,0.5)'], ['rgba(120,160,80,0.5)', 'rgba(24,36,26,0.5)']), gravel: mottle('#8e8472', ['rgba(120,112,98,0.4)', 'rgba(160,150,132,0.3)', 'rgba(104,92,74,0.35)'], ['rgba(200,196,186,0.5)', 'rgba(70,66,60,0.45)', 'rgba(150,140,124,0.5)'], 12),
     floor: boards(33, 52, 62, 0.83, { long: true, vary: 10 }),                // wide pine, 10" boards
     loftdeck: boards(33, 52, 62, 0.83, { long: true, vary: 10 }),             // same wide pine as the main floor (owner, 2026-10-06)
@@ -864,6 +864,7 @@
     var wt = FIN.fin === 'white' ? T.whitewash : T.wallnat; wt.rotation = FIN.dir === 'v' ? Math.PI / 2 : 0;
     MAT.ply.map = wt; MAT.interior.map = wt; MAT.ply.needsUpdate = MAT.interior.needsUpdate = true;
     var ct = FIN.ceil === 'white' ? T.ceilwhite : T.ceilnat; ct.rotation = FIN.cdir === 's' ? Math.PI / 2 : 0; MAT.roof.map = ct; MAT.roof.needsUpdate = true;
+    var cb = FIN.ceil === 'white' ? 1.45 : 1; MAT.roof.color.setRGB(cb, cb, cb);   // a painted white ceiling faces down and gets little light, so it is lifted to read as true white
     document.querySelectorAll('#wallsw button, #ceilfsw button').forEach(function (b) { b.classList.toggle('on', FIN[b.getAttribute('data-k')] === b.getAttribute('data-v')); });
     envDirty = 2; if (save && k) { try { localStorage.setItem('sbc.' + k, v); } catch (e) {} }
   }
