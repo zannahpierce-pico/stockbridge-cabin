@@ -1028,7 +1028,7 @@
     var setStain = function (btn, save) {
       var s = DATA.deck_stains[+btn.getAttribute('data-i')], old = MAT.deck_wood.map;
       MAT.deck_wood.map = boards(s[1], s[2], s[3], 0.46, { long: true }); MAT.deck_wood.needsUpdate = true; if (old) old.dispose();
-      MAT.deck_post.color.set(hsl(s, 2)).convertSRGBToLinear(); MAT.roof_post.color.set(hsl(s, 2)).convertSRGBToLinear();   // the porch-roof posts too MAT.deck_frame.color.set(hsl(s, -3)).convertSRGBToLinear();
+      MAT.deck_post.color.set(hsl(s, 2)).convertSRGBToLinear(); MAT.roof_post.color.set(hsl(s, 2)).convertSRGBToLinear(); MAT.deck_frame.color.set(hsl(s, -3)).convertSRGBToLinear();   // posts, rails and stairs; the porch-roof posts; the rim, beams and support posts
       stainSw.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === btn); }); sN.textContent = s[0]; renderer.shadowMap.needsUpdate = true;
       if (save) { try { localStorage.setItem('sbc.stain', s[0]); } catch (e) {} }
     };
