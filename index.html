@@ -146,7 +146,7 @@
 </div>
 <div class="panel" id="p_furn" hidden>
   <span class="ptitle">Inside wall boards</span>
-  <div class="views" id="wallsw"><button type="button" data-k="dir" data-v="h">Horizontal</button><button type="button" data-k="dir" data-v="v">Vertical</button><span style="width:10px"></span><button type="button" data-k="fin" data-v="white">Whitewashed</button><button type="button" data-k="fin" data-v="natural">Natural wood</button></div>
+  <div class="views" id="wallsw"><button type="button" data-k="dir" data-v="h">Horizontal</button><button type="button" data-k="dir" data-v="v">Vertical</button><span style="width:10px"></span><button type="button" data-k="fin" data-v="white">Whitewashed</button><button type="button" data-k="fin" data-v="natural">Natural wood</button><span style="width:10px"></span><button type="button" data-k="bw" data-v="6" title="About 5 1/2 inches showing">1&times;6</button><button type="button" data-k="bw" data-v="8" title="Shiplap, about 6 3/4 inches showing">1&times;8</button><button type="button" data-k="bw" data-v="10" title="Shiplap, about 8 3/4 inches showing">1&times;10</button></div>
   <span class="ptitle">Ceiling boards</span>
   <div class="views" id="ceilfsw"><button type="button" data-k="cdir" data-v="l" title="Boards run the length of the cabin, front to back">Lengthwise</button><button type="button" data-k="cdir" data-v="s" title="Boards run up the slope, from the low wall to the tall wall">Up the slope</button><span style="width:10px"></span><button type="button" data-k="ceil" data-v="natural">Natural wood</button><button type="button" data-k="ceil" data-v="white">Painted white</button></div>
   <span class="ptitle">Couch fabric</span>
@@ -977,17 +977,19 @@
   }); });
   document.addEventListener('pointerdown', function (e) { if (!e.target.closest('.panel') && !e.target.closest('.pop')) closePanels(); });
   // wall and ceiling boards: white or natural, and the wall boards level or upright. The wall texture is turned a quarter turn for upright boards.
-  var FIN = { dir: 'h', fin: 'white', ceil: 'natural', cdir: 's' };   // first visit: level whitewashed wall boards, natural ceiling boards running up the slope
+  var FIN = { dir: 'h', fin: 'white', bw: '6', ceil: 'natural', cdir: 's' }, WALLT = {};   // first visit: level whitewashed wall boards, natural ceiling boards running up the slope
   function setFinish(k, v, save) {
     if (k) FIN[k] = v;
-    var wt = FIN.fin === 'white' ? T.whitewash : T.wallnat; wt.rotation = FIN.dir === 'v' ? Math.PI / 2 : 0;
+    var face = { '8': 6.75 / 12, '10': 8.75 / 12 }[FIN.bw], wk = FIN.fin + FIN.bw;   /* 1x8 and 1x10 shiplap: the width showing once lapped, and a shadow line between boards */
+    var wt = !face ? (FIN.fin === 'white' ? T.whitewash : T.wallnat) : WALLT[wk] || (WALLT[wk] = FIN.fin === 'white' ? boards(36, 20, 84, face, { long: true, vary: 5, joint: 'rgba(110,90,65,0.3)', rowline: 'rgba(110,90,65,0.35)', rowh: 1.5 }) : boards(34, 46, 70, face, { long: true, vary: 6, rowline: 'rgba(70,45,20,0.4)', rowh: 1.5 }));
+    wt.rotation = FIN.dir === 'v' ? Math.PI / 2 : 0;
     MAT.ply.map = wt; MAT.interior.map = wt; MAT.ply.needsUpdate = MAT.interior.needsUpdate = true;
     var ct = FIN.ceil === 'white' ? T.ceilwhite : T.ceilnat; ct.rotation = FIN.cdir === 's' ? Math.PI / 2 : 0; MAT.roof.map = ct; MAT.roof.needsUpdate = true;
     var cb = FIN.ceil === 'white' ? 1.45 : 1; MAT.roof.color.setRGB(cb, cb, cb);   // a painted white ceiling faces down and gets little light, so it is lifted to read as true white
     document.querySelectorAll('#wallsw button, #ceilfsw button').forEach(function (b) { b.classList.toggle('on', FIN[b.getAttribute('data-k')] === b.getAttribute('data-v')); });
     envDirty = 2; if (save && k) { try { localStorage.setItem('sbc.' + k, v); } catch (e) {} }
   }
-  ['dir', 'fin', 'ceil', 'cdir'].forEach(function (k) { try { var v = localStorage.getItem('sbc.' + k); if (v && document.querySelector('[data-k="' + k + '"][data-v="' + v + '"]')) FIN[k] = v; } catch (e) {} });
+  ['dir', 'fin', 'bw', 'ceil', 'cdir'].forEach(function (k) { try { var v = localStorage.getItem('sbc.' + k); if (v && document.querySelector('[data-k="' + k + '"][data-v="' + v + '"]')) FIN[k] = v; } catch (e) {} });
   setFinish(null, null, false);
   ['wallsw', 'ceilfsw'].forEach(function (id) { document.getElementById(id).addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setFinish(b.getAttribute('data-k'), b.getAttribute('data-v'), true); }); });
   var stoolSw = document.getElementById('stoolsw');
