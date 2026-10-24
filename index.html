@@ -85,7 +85,7 @@
   @media (max-width: 700px) { h1 { font-size: 18px; } }
 </style>
 <div class="bar">
-  <nav class="sitenav" aria-label="Stockbridge Cabin pages"><a href="./" aria-current="page">3D model</a><a href="electrical-plan.html">Electrical</a><a href="building-notes.html">Notes</a></nav>
+  <nav class="sitenav" aria-label="Stockbridge Cabin pages"><a href="./" aria-current="page">3D model</a><a href="electrical-plan.html">Electrical</a><a href="cabinet-wall.html">Cabinet wall</a><a href="building-notes.html">Notes</a></nav>
   <div class="seg own" id="mode" role="group" aria-label="Navigation mode"><button data-m="orbit" id="m_orbit" class="on" title="Turn the whole model around from outside">Orbit</button><button data-m="walk" id="m_walk" title="Walk through at eye height">Walk</button></div>
   <button type="button" class="pop uibtn" data-p="p_views" id="b_views">Views</button>
   <button type="button" class="pop uibtn" data-p="p_layers" id="b_layers">Show / hide</button>
@@ -876,7 +876,7 @@
     (v.off || []).forEach(function (n) { if (box(n).checked) { box(n).checked = false; viewHid.push(n); } });
     setMode(mode); goal = null; if (perch) pullSeat(perch.seat, false); perch = null; perchUI(); camera.fov = v.fov; camera.updateProjectionMatrix();
     if (mode === 'walk') {
-      base = name === 'loft' ? LOFT_Z : 0; standH = standTarget = base > 1 ? 3.6 : 5.4; camera.position.set(v.pos[0], eye(), v.pos[2]);
+      base = name === 'loft' ? LOFT_Z : INSIDE[name] ? 0 : floorUnder(v.pos[0], v.pos[2], Math.min(v.pos[1], LOFT_Z - 1), 0); standH = standTarget = base > 1 ? 3.6 : 5.4; camera.position.set(v.pos[0], eye(), v.pos[2]);   /* outside views stand you on the ground (or deck) under the view, not at deck height in mid-air */
       var dx = v.tgt[0] - v.pos[0], dy = (INSIDE[name] ? v.tgt[1] : eye()) - eye(), dz = v.tgt[2] - v.pos[2], len = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
       if (Math.abs(dx) + Math.abs(dz) > 0.05) yaw = Math.atan2(-dx, -dz);
       pitch = Math.max(-1.25, Math.min(1.25, Math.asin(dy / len))); applyLook();
@@ -891,7 +891,7 @@
     var b = e.target.closest('button'); if (!b) return; var m = b.getAttribute('data-m'); if (m === mode) return;
     if (m === 'walk') {
       lookFromCamera(); var p = camera.position;
-      base = (p.y > LOFT_Z + 1.5 && p.x > DATA.plan.loft[0] && -p.z < DATA.plan.loft[3] && -p.z > 0 && p.x < DATA.room[0]) ? LOFT_Z : 0;
+      base = floorUnder(p.x, p.z, p.y - 1.0, 0);                   /* the highest floor, loft, deck or ground under the camera: outside, that is the hillside, not deck height */
       setMode('walk'); goal = null; standH = standTarget = base > 1 ? 3.6 : 5.4; p.y = eye(); applyLook();
     } else {
       var d = camera.getWorldDirection(new THREE.Vector3()); setMode('orbit');
@@ -1009,6 +1009,12 @@
     var o = SFN * (k * SF.nx + i), best = null;
     for (var s = 0; s < SFN; s++) { var h = SF.h[o + s]; if (h === h && h <= b + STEP_UP && h >= b - STEP_UP && (!best || h > best.y)) best = { y: h, m: SFMAT[SF.m[o + s]] }; }
     return best;
+  }
+  function floorUnder(x, z, top, dflt) {                           /* the highest surface at (x, z) no higher than top (else the lowest there is), for placing you from a view or orbit; dflt when there is none */
+    var i = Math.floor((x - SF.x0) / SF.c), k = Math.floor((z - SF.z0) / SF.c); if (i < 0 || k < 0 || i >= SF.nx || k >= SF.nz) return dflt;
+    var o = SFN * (k * SF.nx + i), best = null, low = null;
+    for (var s = 0; s < SFN; s++) { var h = SF.h[o + s]; if (h !== h) continue; if (h <= top && (best === null || h > best)) best = h; if (low === null || h < low) low = h; }
+    return best !== null ? best : (low !== null ? low : dflt);
   }
   function noFloorWhy(x, z, b) {                                     // why there is nothing to stand on at (x, z)
     var i = Math.floor((x - SF.x0) / SF.c), k = Math.floor((z - SF.z0) / SF.c); if (i < 0 || k < 0 || i >= SF.nx || k >= SF.nz) return 'That is the edge of the model';
