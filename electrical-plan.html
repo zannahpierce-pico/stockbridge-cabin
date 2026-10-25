@@ -64,18 +64,18 @@
   .total { position: sticky; top: 0; z-index: 2; background: var(--paper); border-bottom: 2px solid var(--ink); padding: 8px 0; font-family: var(--display); font-size: 24px; letter-spacing: 0.02em; }
   .total small { font-family: var(--mono); font-size: 12px; color: var(--ink-2); margin-left: 10px; letter-spacing: 0; }
   #mat table { min-width: 680px; } #mat td.why { color: var(--ink-2); font-size: 13px; }
-  #mat td.nm a.hd { font-family: var(--mono); font-size: 10px; color: var(--sw); text-decoration: none; border: 1px solid var(--rule); border-radius: 8px; padding: 1px 6px; margin-left: 6px; white-space: nowrap; }
-  #mat td.nm a.hd:hover, #mat td.nm a.hd:focus-visible { border-color: var(--sw); }
+  #mat td.nm a.hd, #combo td.nm a.hd { font-family: var(--mono); font-size: 10px; color: var(--sw); text-decoration: none; border: 1px solid var(--rule); border-radius: 8px; padding: 1px 6px; margin-left: 6px; white-space: nowrap; }
+  #mat td.nm a.hd:hover, #mat td.nm a.hd:focus-visible, #combo td.nm a.hd:hover, #combo td.nm a.hd:focus-visible { border-color: var(--sw); }
   .hdx { font-family: var(--mono); font-size: 10px; color: var(--sw); border: 1px solid var(--rule); border-radius: 8px; padding: 1px 6px; white-space: nowrap; }
   #mat tr.skip td { color: var(--ink-2); } #mat tr.skip td.nm { text-decoration: line-through; } #mat tr.skip a.hd { color: var(--ink-2); }
-  #mat tr.have td.cost { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
-  #mat th.hv { font-size: 10px; padding-right: 4px; }
+  #mat tr.have td.cost, #combo tr.have td.cost { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
+  #mat th.hv, #combo th.hv { font-size: 10px; padding-right: 4px; }
   #mat button.sk { font: inherit; font-family: var(--mono); font-size: 10px; color: var(--ink-2); background: none; border: 1px solid var(--rule); border-radius: 8px; padding: 1px 6px; cursor: pointer; white-space: nowrap; }
   #mat button.sk:hover, #mat button.sk:focus-visible { border-color: var(--ink-2); color: var(--ink); }
   #mat tr.sub td { border-bottom: 0; font-weight: 600; padding-top: 8px; }
   #mat tr.gsub td { color: var(--ink-2); font-size: 13px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
   #mat input[type=number] { width: 6.5ch; font: inherit; font-family: var(--mono); font-size: 13px; text-align: right; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; padding: 2px 4px; }
-  #mat input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--rec); } #mat input[type=checkbox]:disabled { opacity: 0.35; }
+  #mat input[type=checkbox], #combo input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--rec); } #mat input[type=checkbox]:disabled { opacity: 0.35; }
   @media (max-width: 720px) { header { grid-template-columns: 1fr; } h1 { font-size: 34px; } .tools .hint { margin-left: 0; } }
 </style>
 <div class="topbar"><nav class="sitenav" aria-label="Stockbridge Cabin pages"><a href="./">3D model</a><a href="electrical-plan.html" aria-current="page">Electrical</a><a href="cabinet-wall.html">Cabinet wall</a><a href="building-notes.html">Notes</a></nav></div>
@@ -141,8 +141,8 @@
 <div class="total" id="grand"></div>
 <div id="mat"></div>
 <h3>Combined shopping list</h3>
-<p>The lines still to buy, added up by what you would put in the trolley.</p>
-<div class="tw"><table id="combo"><thead><tr><th>Item</th><th class="r">Quantity</th><th class="r">Rough cost</th></tr></thead><tbody></tbody></table></div>
+<p>The same lines added up by product, the way they would go in the trolley. Skipped lines are left out. A tick here marks every plan line of that product as had.</p>
+<div class="tw"><table id="combo"><thead><tr><th class="hv">Have</th><th>Item</th><th class="r">Quantity</th><th class="r">Rough cost</th></tr></thead><tbody></tbody></table></div>
 </div>
 
 <h2>Still to settle</h2>
@@ -388,9 +388,11 @@ Panel working space 110.26: 30" wide, 36" deep, 6'-6" high clear. Already kept i
       r.sk.textContent = r.skip ? 'add back' : 'skip'; r.sk.setAttribute('aria-label', (r.skip ? 'Add back ' : 'Skip ') + r.name);
       r.cost.textContent = r.skip ? '' : r.have ? 'have' : money(c);
       if (r.skip) { nSkip++; return; }
+      var o = combo[r.sku]; if (!o) { o = combo[r.sku] = { name: r.name, unit: r.unit, qty: 0, buy: 0, cost: 0, rows: [], hd: [], seen: {} }; order.push(r.sku); }
+      o.qty += r.qty; o.rows.push(r); (r.hd || []).forEach(function (l) { if (!o.seen[l[1]]) { o.seen[l[1]] = 1; o.hd.push(l); } });
       if (r.have) { have += c; nHave++; return; }
+      o.buy += r.qty; o.cost += c;
       r.sec.t += c; buy += c; if (r.fx) { r.sec.fx += c; fxAll += c; } if (r.grp) r.sec.g[r.grp] = (r.sec.g[r.grp] || 0) + c;
-      if (!combo[r.sku]) { combo[r.sku] = { name: r.name, qty: 0, unit: r.unit, cost: 0 }; order.push(r.sku); } combo[r.sku].qty += r.qty; combo[r.sku].cost += c;
     });
     D.sections.forEach(function (sec) { sec.sub.textContent = money(sec.t); sec.grps.forEach(function (g) { g.cell.textContent = money(sec.g[g.name] || 0); }); if (sec.fxCell) { sec.fxCell.textContent = money(sec.fx); sec.hwCell.textContent = money(sec.t - sec.fx); } });
     D.bundles.forEach(function (b) { if (b.el) b.el.setAttribute('aria-pressed', state(b)); });
@@ -399,7 +401,14 @@ Panel working space 110.26: 30" wide, 36" deep, 6'-6" high clear. Already kept i
     if (nSkip) s += ' &middot; ' + nSkip + ' line' + (nSkip > 1 ? 's' : '') + ' skipped';
     document.getElementById('grand').innerHTML = 'Still to buy ' + money(Math.round(buy)) + '<small>' + s + '</small>';
     var cb = document.querySelector('#combo tbody'); cb.innerHTML = '';
-    order.forEach(function (k) { var o = combo[k], tr = document.createElement('tr'); tr.innerHTML = '<td></td><td class="r n"></td><td class="r n"></td>'; tr.children[0].textContent = o.name; tr.children[1].textContent = o.qty + ' ' + o.unit; tr.children[2].textContent = money(o.cost); cb.appendChild(tr); });
+    order.forEach(function (k) {                                                                                  // one line per product; its tick marks every plan line of that product as had
+      var o = combo[k], all = !o.buy, tr = document.createElement('tr'); tr.className = all ? 'have' : '';
+      tr.innerHTML = '<td><input type="checkbox" aria-label="Have ' + o.name.replace(/"/g, '&quot;') + '"></td><td class="nm"></td><td class="r n"></td><td class="r n cost"></td>';
+      tr.children[1].textContent = o.name; o.hd.forEach(function (l) { var a = document.createElement('a'); a.className = 'hd'; a.href = l[1]; a.target = '_blank'; a.rel = 'noopener'; a.textContent = l[0]; a.title = 'Open the Home Depot product page in a new tab'; tr.children[1].appendChild(a); });
+      tr.children[2].textContent = (all || o.buy === o.qty ? o.qty : o.buy + ' of ' + o.qty) + ' ' + o.unit; tr.children[3].textContent = all ? 'have' : money(o.cost);
+      var c = tr.firstChild.firstChild; c.checked = all; c.addEventListener('change', function () { o.rows.forEach(function (r) { setHave(r, c.checked); }); save(); draw(); });
+      cb.appendChild(tr);
+    });
   }
   save(); draw();
 })();
