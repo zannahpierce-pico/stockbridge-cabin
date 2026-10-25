@@ -909,11 +909,11 @@
   document.getElementById('mode').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) goMode(b.getAttribute('data-m')); });
   // ================= LOOK: the walking view's drag-to-look and click-to-go, without the body. For looking at the wiring with the walls off: you glide
   // straight to whatever you click, through anything, with no footsteps, doors or sitting. Q and E go down and up. It comes on by itself from Show / hide.
-  var lgoal = null, autoLook = false;
+  var lgoal = null, autoLook = false, DOORM = {}; DOORS.forEach(function (d) { groups[d.g].children.forEach(function (m) { DOORM[m.id] = 1; }); });   /* a click on a door goes through it to whatever is beyond */
   function shown(o) { for (; o; o = o.parent) if (!o.visible) return false; return true; }
   function lookClick(n) {
     ray.setFromCamera(n, camera); var dir = ray.ray.direction.clone(), p = camera.position;
-    var hit = ray.intersectObjects(everything, false).filter(function (h) { return shown(h.object); })[0];
+    var hit = ray.intersectObjects(everything, false).filter(function (h) { return !DOORM[h.object.id] && shown(h.object); })[0];
     if (!hit) { lgoal = p.clone().addScaledVector(dir, 8); return; }
     var nrm = hit.face ? hit.face.normal.clone().transformDirection(hit.object.matrixWorld) : UPV, q = hit.point.clone(), over = p.y - hit.point.y;
     if (nrm.y > 0.6 && dir.y < -0.15) { q.addScaledVector(dir, -1.0); q.y = hit.point.y + (over > 2.5 && over < 6.5 ? over : 5.0); }   /* a floor, deck or the ground: go and stand over it at the height you are at now */
