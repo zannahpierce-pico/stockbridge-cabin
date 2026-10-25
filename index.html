@@ -86,7 +86,7 @@
 </style>
 <div class="bar">
   <nav class="sitenav" aria-label="Stockbridge Cabin pages"><a href="./" aria-current="page">3D model</a><a href="electrical-plan.html">Electrical</a><a href="cabinet-wall.html">Cabinet wall</a><a href="building-notes.html">Notes</a></nav>
-  <div class="seg own" id="mode" role="group" aria-label="Navigation mode"><button data-m="orbit" id="m_orbit" class="on" title="Turn the whole model around from outside">Orbit</button><button data-m="walk" id="m_walk" title="Walk through at eye height">Walk</button><button data-m="look" id="m_look" title="Look around without walking: click anything to go straight to it">Look</button></div>
+  <button type="button" class="pop uibtn" data-p="p_walk" id="b_walk" title="How you get around, and how to move">Walk</button>
   <button type="button" class="pop uibtn" data-p="p_views" id="b_views">Views</button>
   <button type="button" class="pop uibtn" data-p="p_layers" id="b_layers">Show / hide</button>
   <button type="button" class="pop uibtn" data-p="p_furn" id="b_furn">Options</button>
@@ -94,7 +94,6 @@
   <button type="button" class="uibtn on" id="b_notes" aria-pressed="true" title="Show or hide the owners' notes and questions in the model">Notes: on</button>
   <button type="button" class="uibtn" id="b_move" aria-pressed="false" title="Turn this on to drag furniture around and turn it">Move furniture: off</button>
   <button type="button" class="uibtn on" id="b_sound" aria-pressed="true" title="Footsteps, doors and furniture sounds">Sound: on</button>
-  <button type="button" class="uibtn" id="b_help">How to move</button>
 </div>
 <div id="face" aria-hidden="true"></div>
 <div id="acts"></div>
@@ -114,9 +113,14 @@
   <b>Using things</b>Point at something to see what you can do with it. Click a door or a gate and you reach for the handle and open it. Click a chair or the couch to sit: you pull a stool out first, and push it back in when you stand up (Stand up, Escape or just walk off). Click the ladder to climb up to the loft or back down. The fridge, the toilet box, the dog crates, the hanging chair and the cleats beside the deck hanging chairs also do things when clicked. F does the same for whatever is in the middle of the view.
   <b>Moving furniture</b>Turn on Move furniture in the bar. Then press on a piece and drag it across the floor: it slides along walls and other furniture and stops where there is no room. While you hold it, the mouse wheel or R turns it. Let go to leave it there; Escape puts it back. The bar that appears lets you nudge it by 3" or turn it by 5 degrees (on a phone, use those to turn it). Your changes stay on this device; Copy changes gives a list to send on.
   <b>Yellow notes</b>These are our notes and questions about the plan. Click one to read it. The Notes button in the bar turns them off.
-  <b>Looking at the wiring</b>Look, in the bar, is the walking view without the walking: click anything and you go straight to it, through whatever is in the way. Drag to look, arrows or WASD move, Q and E go down and up. It comes on by itself when you take a wall off or show the wiring from Show / hide; Walk puts you back on your feet.
+  <b>Looking at the wiring</b>Look, in the Walk menu, is the walking view without the walking: click anything and you go straight to it, through whatever is in the way. Drag to look, arrows or WASD move, Q and E go down and up. It comes on by itself when you take a wall off or show the wiring from Show / hide; Walk, in the same menu, puts you back on your feet.
   <b>Menus</b>Views jumps to a room. Show / hide starts with the electrical planning switches (framing and wiring, electrical labels), then takes off the roof or a wall. Options tries wall and ceiling boards, and couch, rug, stool and deck seating choices. Lights switches to night.
   <br><button type="button" class="uibtn" id="help_ok">Got it</button>
+</div>
+<div class="panel" id="p_walk" hidden>
+  <span class="ptitle">Getting around</span>
+  <div class="seg" id="mode" role="group" aria-label="Navigation mode"><button data-m="walk" id="m_walk" title="On your feet at eye height: click the floor to walk there">Walk</button><button data-m="look" id="m_look" title="Without walking: click anything to go straight to it">Look</button><button data-m="orbit" id="m_orbit" class="own" title="Turn the whole model around from outside">Orbit</button></div>
+  <div class="views" style="margin-top:8px"><button type="button" id="b_help" title="A short card on walking, using things and moving furniture">How to move</button></div>
 </div>
 <div class="panel" id="p_views" hidden>
   <span class="ptitle">Outside</span>
@@ -865,6 +869,7 @@
   function setMode(m) {
     if (m !== 'walk') cancelBeing(); mode = m; document.body.classList.toggle('walking', m === 'walk'); controls.enabled = (m === 'orbit'); mvBar(); stage.classList.toggle('walk', m === 'walk' || m === 'look'); mini.hidden = (m !== 'walk'); hint.innerHTML = HINTS[m];
     document.querySelectorAll('#mode button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-m') === m); });
+    document.getElementById('b_walk').textContent = { walk: 'Walk', look: 'Look', orbit: 'Orbit' }[m];
   }
   function lookFromCamera() {                                      // take yaw and pitch from wherever the camera is pointing now
     var d = camera.getWorldDirection(new THREE.Vector3());
@@ -929,7 +934,7 @@
   }
   function elecChange() {                                           /* a wall off or the wiring on is for looking, not walking: Look comes on by itself, and Walk comes back once everything is put back */
     var on = box('framing').checked || tagBox.checked || simple.slice(0, 5).some(function (n) { return !box(n).checked; });
-    if (on && mode === 'walk') { autoLook = true; goMode('look'); say('Look mode: click anything to go straight to it. Walk, in the bar, puts you back on your feet', 3600); }
+    if (on && mode === 'walk') { autoLook = true; goMode('look'); say('Look mode: click anything to go straight to it. Walk, in the Walk menu, puts you back on your feet', 3600); }
     else if (!on && mode === 'look' && autoLook) { autoLook = false; goMode('walk'); }
   }
   ['framing', 'tags', 'roof', 'wall_front', 'wall_back', 'wall_driveway', 'wall_tall'].forEach(function (n) { box(n).addEventListener('change', elecChange); });
@@ -1820,10 +1825,8 @@
   function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
   window.addEventListener('resize', resize); resize();
   var start = (location.hash || '').slice(1); setView(VIEWS[start] ? start : 'front');
-  (function () {                                                    // a short how-to card, shown on the first visit and from its button; once closed it stays closed
-    var h = document.getElementById('help'), seen = false;
-    try { seen = localStorage.getItem('cabin_help') === '1'; } catch (e) {}
-    h.hidden = seen;
+  (function () {                                                    // a short how-to card, from the Walk menu's How to move button only
+    var h = document.getElementById('help'); h.hidden = true;
     document.getElementById('help_ok').addEventListener('click', function () { h.hidden = true; try { localStorage.setItem('cabin_help', '1'); } catch (e) {} });
     document.getElementById('b_help').addEventListener('click', function () { h.hidden = !h.hidden; });
   })();
